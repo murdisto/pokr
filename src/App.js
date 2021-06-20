@@ -1,15 +1,30 @@
+import React from 'react';
+import {
+	BrowserRouter as Router,
+	Route,
+	Switch,
+	Redirect,
+} from 'react-router-dom';
+import { Home } from "./components/Home";
+import { Login } from "./components/Login";
+import { Signup } from "./components/Signup";
+import { AuthProvider } from "./Auth";
+import { PrivateRoute } from './PrivateRoute';
 import './App.css';
 
-function App() {
+export const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        
-        test
-        
-      </header>
-    </div>
+    <AuthProvider>
+      <Router>
+        <div className="App">
+          <header className="App-header">
+          <PrivateRoute exact path="/" component={Home} />          
+          <Route exact path="/login" component={Login} />          
+          <Route exact path="/signup" component={Signup} />          
+          </header>
+        </div>
+      </Router>
+    </AuthProvider>
+    
   );
 }
-
-export default App;
