@@ -15,13 +15,15 @@ export const Signup = ({ history }) => {
 					.createUserWithEmailAndPassword(email.value, password.value);
 				// console.log(response.user.email);
 				// console.log(response);
-				// console.log(email);
+        // console.log(email);
+        // console.log('sup');
+        
 
-				// firebase // create a user document in the database
-				// 	.firestore()
-				// 	.collection('users')
-				// 	.doc(email.value)
-				// 	.set({ email: response.user.email, uid: response.user.uid });
+				firebase // create a user document in the database
+					.firestore()
+					.collection('users') // select collection to add document to
+					.doc(email.value) // name of document
+					.set({ email: response.user.email, uid: response.user.uid });
 
 				history.push('/'); // then redirect to that user's dashboard
 			} catch (error) {
