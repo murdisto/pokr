@@ -23,7 +23,7 @@ export const Signup = ({ history }) => {
 					.firestore()
 					.collection('users') // select collection to add document to
 					.doc(email.value) // name of document
-					.set({ email: response.user.email, uid: response.user.uid });
+					.set({ email: response.user.email, uid: response.user.uid, sessions: [] });
 
 				history.push('/'); // then redirect to that user's dashboard
 			} catch (error) {

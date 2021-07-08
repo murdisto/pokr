@@ -2,9 +2,8 @@ import React from 'react';
 import {
 	BrowserRouter as Router,
 	Route,
-	Switch,
-	Redirect,
-} from 'react-router-dom';
+	
+} from 'react-router-dom'; // Switch, Redirect,
 import { Home } from "./components/Home";
 import { Login } from "./components/Login";
 import { Signup } from "./components/Signup";
