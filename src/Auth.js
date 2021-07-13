@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { firebase } from './firebase';
+import { auth } from './firebase';
 
 // Create a new context
 export const AuthContext = React.createContext();
@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
 
 	// when the auth state changes, set the current user to the value returned by firebase
 	useEffect(() => {
-    firebase.auth().onAuthStateChanged(user => {
+    auth.onAuthStateChanged(user => {
       setCurrentUser(user);
       setPending(false);
     });

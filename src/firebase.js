@@ -2,7 +2,7 @@ import firebase from 'firebase/app'; // firebase v8.0.0 breatking change https:/
 import 'firebase/auth';
 import 'firebase/firebase-firestore';
 
-const firebaseConfig = firebase.initializeApp({
+const firebaseConfig = {
 	apiKey: process.env.REACT_APP_FIREBASE_KEY,
 	authDomain: process.env.REACT_APP_FIREBASE_DOMAIN,
 	databaseURL: process.env.REACT_APP_FIREBASE_DATABASE,
@@ -11,6 +11,18 @@ const firebaseConfig = firebase.initializeApp({
 	messagingSenderId: process.env.REACT_APP_FIREBASE_SENDER_ID,
   appId: process.env.REACT_APP_FIREBASE_APP_ID,
   measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
-});
+};
+firebase.initializeApp(firebaseConfig);
 
-export { firebaseConfig as firebase };
+
+const db = firebase.firestore();
+const auth = firebase.auth();
+
+const usersCollection = db.collection('users');
+
+
+export { 
+  db,
+  auth,
+  usersCollection
+};

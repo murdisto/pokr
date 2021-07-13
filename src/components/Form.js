@@ -1,5 +1,9 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { db, auth } from '../firebase';
+import firebase from 'firebase/app';
+
+
 
 
 const SelectGame = ({ label, name, onChange, onBlur, register, required }) => (
@@ -45,9 +49,17 @@ const InputTime = ({ label, dataLabel, register, required, type }) => (
 
 export const Form = () => {
   const { register, handleSubmit } = useForm();
+  
   const onSubmit = data => {
-    console.log(data);
-  }
+    const { currentUser } = auth;
+    console.log(currentUser.uid);
+    db
+      .collection('users')
+      .doc(currentUser.email)
+      .update({ sessions: firebase.firestore.FieldValue.arrayUnion(data) });
+      
+  };
+  
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div>

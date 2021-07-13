@@ -1,6 +1,6 @@
 import React, { useCallback, useContext } from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import { firebase } from '../firebase';
+import { auth } from '../firebase';
 import { AuthContext } from '../Auth';
 
 export const Login = ({ history }) => {
@@ -11,8 +11,7 @@ export const Login = ({ history }) => {
 			event.preventDefault(); // prevent page reload on submit
 			const { email, password } = event.target.elements; // grab the email and password inputs
 			try {
-				await firebase
-					.auth() // grab the input values and send them to firebase to create a new user
+				await auth // grab the input values and send them to firebase to create a new user
 					.signInWithEmailAndPassword(email.value, password.value);
 				history.push('/'); // then redirect to that user's dashboard
 			} catch (error) {

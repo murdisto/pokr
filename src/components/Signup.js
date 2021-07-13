@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { firebase } from '../firebase';
+import { auth, db } from '../firebase';
 
 export const Signup = ({ history }) => {
 	// useCallback hook. returns memoized callback.
@@ -10,8 +10,7 @@ export const Signup = ({ history }) => {
 			event.preventDefault(); // prevent page reload on submit
 			const { email, password } = event.target.elements; // grab the email and password inputs
 			try {
-				const response = await firebase
-					.auth() // grab the input values and send them to firebase to create a new user
+				const response = await auth // grab the input values and send them to firebase to create a new user
 					.createUserWithEmailAndPassword(email.value, password.value);
 				// console.log(response.user.email);
 				// console.log(response);
@@ -19,8 +18,7 @@ export const Signup = ({ history }) => {
         // console.log('sup');
         
 
-				firebase // create a user document in the database
-					.firestore()
+				db // create a user document in the database
 					.collection('users') // select collection to add document to
 					.doc(email.value) // name of document
 					.set({ email: response.user.email, uid: response.user.uid, sessions: [] });
